@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark height-100">
+    <div class="cotainer container-fluid">
+        <a class="navbar-brand">
+            <i class="bi bi-geo-alt-fill"></i>
+            InterEvent
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <p class="user-name" [hidden]="!isLogin">{{ fullName }}</p>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item pad-hor-10" [hidden]="isLogin">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                    data-bs-target="#registerModal">
+                    <i class="bi bi-person-fill-add"></i>
+                    Registrarse
+                </button>
+            </li>
+                <li class="nav-item pad-hor-10" [hidden]="isLogin">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="bi bi-person-fill"></i>
+                        Iniciar sesión
+                    </button>
+                </li>
+                <li class="nav-item pad-hor-10"  [hidden]="!isLogin">
+                    <button type="button" class="btn btn-danger" (click)="LogOut()">
+                        <i class="bi bi-person-fill-add"></i>
+                        Cerrar sesión
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--Login Modal-->
+<div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <app-login (userDetails)="actualizarHeader($event)"></app-login>
+        </div>
+    </div>
+</div>
+
+<!--Register Modal-->
+<div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="registerModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <app-register></app-register>
+        </div>
+    </div>
+</div>

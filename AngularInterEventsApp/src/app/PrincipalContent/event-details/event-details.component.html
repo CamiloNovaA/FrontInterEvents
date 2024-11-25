@@ -1,0 +1,44 @@
+<form [formGroup]="loginForm" (ngSubmit)="Edit()">
+    <div class="modal-header">
+        <h1 class="modal-title fs-5 txt-center" id="staticBackdropLabel">Inicie sesión</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="isOwner">
+            <div class="mb-3">
+                <label for="EmailInput" class="form-label">Correo</label>
+                <input type="email" class="form-control" id="emailLogin" aria-describedby="emailHelp" formControlName="emailLogin">
+                <div *ngIf="loginForm?.get('emailLogin')?.invalid && loginForm?.get('emailLogin')?.touched" class="text-danger">
+                    Correo invalido
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="PasswordInput" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" autocomplete="off" id="passwordLogin" formControlName="passwordLogin">
+                <div *ngIf="loginForm?.get('passwordLogin')?.invalid && loginForm?.get('passwordLogin')?.touched" class="text-danger">
+                    Contraseña es un campo obligatorio
+                </div>
+            </div>
+        </div>
+        <!-- <div *ngIf="!isOwner">
+            <h3>Nombre: {{ event.Name }}</h3>
+            <br>
+            <p>Descripción: {{ event.Description }}</p>
+            <br>
+            <p>Ciudad: {{ event.City }}</p>
+            <br>
+            <p>Fecha y hora: {{ event.DateEvent | date : 'dd/MM/yyyyy HH:mm' }}</p>
+            <br>
+            <p>Dirección: {{ event.Address }}</p>
+            <br>
+            <p>Capacidad: {{ event.Capacity }}</p>
+        </div> -->
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" [hidden]="!isOwner">Editar</button>
+        <button type="submit" class="btn btn-success" [hidden]="!isCreate">Crear</button>
+        <button type="submit" class="btn btn-danger" [hidden]="!isOwner">Eliminar</button>
+        <button type="submit" class="btn btn-success" [hidden]="isOwner">Incribirse</button>
+    </div>
+</form>

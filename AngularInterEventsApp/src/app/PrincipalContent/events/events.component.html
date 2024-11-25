@@ -1,0 +1,56 @@
+<h1 class="text-center">Eventos</h1>
+<div class="scrollable-div">
+    <div class="div-create-button">
+        <button [hidden]="!isLogged" (click)="createEvent()" class="btn btn-success m-10" data-bs-toggle="tooltip" data-bs-placement="top" title="Crear evento">
+            <i class="bi bi-plus-circle-fill"></i>
+            Crear evento
+        </button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-sm ">
+            <thead>
+                <tr>
+                    <th scope="col text-center">Nombre</th>
+                    <th scope="col text-center">Fecha</th>
+                    <th scope="col text-center">Ciudad</th>
+                    <th scope="col text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of eventData; track $index)
+                {
+                <tr>
+                    <th scope="row">{{item.name}}</th>
+                    <td>{{item.dateEvent}}</td>
+                    <td>{{item.nameCity}}</td>
+                    <td class="btn-center">
+                        <button class="btn btn-primary m-10" data-bs-toggle="modal" data-bs-target="#detailsModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalle">
+                            <i class="bi bi-eye-fill"></i>
+                        </button>
+                        <button [hidden]="item.idEventSuscription == 1 || !isLogged" [disabled]="item.owner == idUser" (click)="suscribeForEvent(item.idEvent)" class="btn btn-success m-10" data-bs-toggle="tooltip" data-bs-placement="top" title="Asistir al evento">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </button>
+                        <button [hidden]="!(item.owner == idUser)" (click)="deleteEvent(item.idEvent)" class="btn btn-danger m-10" data-bs-toggle="tooltip" data-bs-placement="top" title="Asistir al evento">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                        <button [hidden]="item.idEventSuscription == 0 || !isLogged" (click)="unsuscribeForEvent(item.idEvent)" class="btn btn-warning m-10" data-bs-toggle="tooltip" data-bs-placement="top" title="Asistir al evento">
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!--Details Modal-->
+<div class="modal fade" id="detailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <app-event-details></app-event-details>
+        </div>
+    </div>
+</div>

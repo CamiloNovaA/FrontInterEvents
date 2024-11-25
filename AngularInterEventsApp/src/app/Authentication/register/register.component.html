@@ -1,0 +1,50 @@
+<form [formGroup]="registerForm" (ngSubmit)="Register($event)" autocomplete="off">
+    <div class="modal-header">
+        <h1 class="modal-title fs-5 txt-center" id="staticBackdropLabel">Registrarse</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <label for="NombreInput" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <div *ngIf="registerForm?.get('name')?.invalid && registerForm?.get('name')?.touched" class="text-danger">
+                Nombre es obligatorio
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="ApellidoInput" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName">
+            <div *ngIf="registerForm?.get('lastName')?.invalid && registerForm?.get('lastName')?.touched" class="text-danger">
+                Apellido es obligatorio
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="EmailInput" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+            <div *ngIf="registerForm?.get('email')?.invalid && registerForm?.get('email')?.touched" class="text-danger">
+                Correo invalido
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="PasswordInput" class="form-label">Contraseña</label>
+            <input type="password" autocomplete="off" class="form-control" id="password" formControlName="password">
+            <div *ngIf="registerForm?.get('password')?.invalid && registerForm?.get('password')?.touched" class="text-danger">
+                Contraseña es un campo obligatorio
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="PasswordrepeatInput" class="form-label">Confirme la contraseña</label>
+            <input (blur)="comparisonPassword()" type="password" autocomplete="off" class="form-control" id="passwordRepeat" formControlName="passwordRepeat">
+            <div *ngIf="registerForm?.get('passwordRepeat')?.invalid && registerForm?.get('passwordRepeat')?.touched" class="text-danger">
+                Debe confirmar su contraseña
+            </div>
+            <div *ngIf="!areEquals && registerForm?.get('passwordRepeat')?.valid" class="text-danger">
+                Las contraseña no coincide
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid || !areEquals">Registrarse</button>
+    </div>
+</form>

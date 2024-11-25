@@ -1,0 +1,25 @@
+.scrollable-div {
+    width: 100%;
+    height: 80vh;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow: auto;
+}
+
+th {
+    text-align: center;
+}
+
+.btn-center {
+    text-align-last: center;
+}
+
+.m-10 {
+    margin: 0 5px;
+}
+
+.div-create-button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}

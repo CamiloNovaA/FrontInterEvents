@@ -1,0 +1,29 @@
+<form [formGroup]="loginForm" (ngSubmit)="Login()">
+    <div class="modal-header">
+        <h1 class="modal-title fs-5 txt-center" id="staticBackdropLabel">Inicie sesión</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="mb-3">
+            <label for="EmailInput" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" formControlName="email">
+            <div *ngIf="loginForm?.get('email')?.invalid && loginForm?.get('email')?.touched" class="text-danger">
+                Correo invalido
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="PasswordInput" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" autocomplete="off" id="password" formControlName="password">
+            <div *ngIf="loginForm?.get('password')?.invalid && loginForm?.get('password')?.touched" class="text-danger">
+                Contraseña es un campo obligatorio
+            </div>
+        </div>
+        <div class="alert alert-danger" role="alert" [hidden]="!invalidCredential">
+            Credenciales invalidas.
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Iniciar sesión</button>
+    </div>
+</form>
