@@ -44,7 +44,7 @@ export class RegisterComponent {
                     this.invalidCredential = false;
                     this.tokenService.saveToken(response.token);
                     this.tokenService.saveUser(response.idUser.toString());
-                    localStorage.setItem("FullName", registry.name + ' ' + registry.lastName);
+                    this.tokenService.setUserName(registry.name + ' ' + registry.lastName);
                     window.location.reload();
                 },
                 error: () => {

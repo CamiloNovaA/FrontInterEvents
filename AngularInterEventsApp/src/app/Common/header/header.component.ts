@@ -32,7 +32,9 @@ export class HeaderComponent implements OnInit {
     if(x > 0)
     {
       this.isLogin = true;
-      this.fullName = localStorage.getItem("FullName")?.toString() || "";
+
+      this.fullName = this.tokenService.getUserName() || "";
+      
       this.userSession.emit(x.toString());
     }
   }

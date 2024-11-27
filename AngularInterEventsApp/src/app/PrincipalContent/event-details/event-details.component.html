@@ -3,7 +3,7 @@
         <h1 class="modal-title fs-5 txt-center" id="staticBackdropLabel">
             <span *ngIf="isCreate">Crear</span>
             <span *ngIf="!isCreate && isOwner">Editar</span>
-            <span *ngIf="!isCreate && !isOwner">{{currentEvent?.name}}</span>
+            <span *ngIf="!isCreate && !isOwner">{{currentEvent.name}}</span>
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
@@ -53,15 +53,15 @@
             </div>
         </div>
         <div *ngIf="!isOwner && !isCreate">
-            <p>Descripción: {{ currentEvent?.description }}</p>
+            <p>Descripción: {{ currentEvent.description }}</p>
             <br>
-            <p>Ciudad: {{ currentEvent?.idcity }}</p>
+            <p>Ciudad: {{ currentEvent.idcity }}</p>
             <br>
-            <p>Fecha y hora: {{ currentEvent?.dateEvent | date : 'dd/MM/yyyyy HH:mm' }}</p>
+            <p>Fecha y hora: {{ currentEvent.dateEvent | date : 'dd/MM/yyyy HH:mm' }}</p>
             <br>
-            <p>Dirección: {{ currentEvent?.address }}</p>
+            <p>Dirección: {{ currentEvent.address }}</p>
             <br>
-            <p>Capacidad: {{ currentEvent?.capacity }}</p>
+            <p>Capacidad: {{ currentEvent.capacity }}</p>
         </div>
     </div>
     <div class="modal-footer">

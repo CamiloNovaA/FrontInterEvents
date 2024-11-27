@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           this.invalidCredential = false;
           this.tokenService.saveToken(response.token);
           this.tokenService.saveUser(response.idUser.toString());
-          localStorage.setItem("FullName", response.fullName);
+          this.tokenService.setUserName(response.fullName);
           window.location.reload();
         },
         error: () => {
