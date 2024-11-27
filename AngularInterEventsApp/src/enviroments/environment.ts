@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
-    urlApiEvents: 'https://localhost:7023/api/Events',
-    urlApiUsers: 'https://localhost:7023/api/Users',
-    urlApiAttendant: 'https://localhost:7023/api/Attendant',
+    urlApiEvents: 'http://www.interevento.somee.com/api/Events',
+    urlApiUsers: 'http://www.interevento.somee.com/api/Users',
+    urlApiAttendant: 'http://www.interevento.somee.com/api/Attendant',
     idUsuario: '',
 };

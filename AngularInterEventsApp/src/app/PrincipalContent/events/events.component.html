@@ -1,11 +1,12 @@
 <h1 class="text-center">Eventos</h1>
 <div class="scrollable-div">
     <div class="div-create-button">
-        <button [hidden]="!isLogged" (click)="createEvent()" class="btn btn-success m-10" data-bs-toggle="tooltip" data-bs-placement="top" title="Crear evento">
+        <button [hidden]="!isLogged" (click)="create()" class="btn btn-success m-10" title="Crear evento" data-bs-toggle="modal" data-bs-target="#detailsModal">
             <i class="bi bi-plus-circle-fill"></i>
             Crear evento
         </button>
     </div>
+    {{currentEvent.idEvent}}
     <div class="table-responsive">
         <table class="table table-hover table-bordered table-sm ">
             <thead>
@@ -24,7 +25,7 @@
                     <td>{{item.dateEvent}}</td>
                     <td>{{item.nameCity}}</td>
                     <td class="btn-center">
-                        <button class="btn btn-primary m-10" data-bs-toggle="modal" data-bs-target="#detailsModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalle">
+                        <button class="btn btn-primary m-10" (click)="details(item.idEvent)" data-bs-toggle="modal" data-bs-target="#detailsModal" data-bs-placement="top" title="Ver detalle">
                             <i class="bi bi-eye-fill"></i>
                         </button>
                         <button [hidden]="item.idEventSuscription == 1 || !isLogged" [disabled]="item.owner == idUser" (click)="suscribeForEvent(item.idEvent)" class="btn btn-success m-10" data-bs-toggle="tooltip" data-bs-placement="top" title="Asistir al evento">
@@ -47,10 +48,10 @@
 
 <!--Details Modal-->
 <div class="modal fade" id="detailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="loginModalLabel" aria-hidden="true">
+    aria-labelledby="detailsModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <app-event-details></app-event-details>
+            <app-event-details [isCreate]="isCreate" [isOwner]="isOwner" [currentEvent]="currentEvent"></app-event-details>
         </div>
     </div>
 </div>

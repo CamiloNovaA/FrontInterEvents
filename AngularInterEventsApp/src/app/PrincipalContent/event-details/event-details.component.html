@@ -1,44 +1,72 @@
-<form [formGroup]="loginForm" (ngSubmit)="Edit()">
+<form [formGroup]="loginForm" (ngSubmit)="edit()">
     <div class="modal-header">
-        <h1 class="modal-title fs-5 txt-center" id="staticBackdropLabel">Inicie sesión</h1>
+        <h1 class="modal-title fs-5 txt-center" id="staticBackdropLabel">
+            <span *ngIf="isCreate">Crear</span>
+            <span *ngIf="!isCreate && isOwner">Editar</span>
+            <span *ngIf="!isCreate && !isOwner">{{currentEvent?.name}}</span>
+        </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-        <div *ngIf="isOwner">
+        <div *ngIf="isCreate || isOwner">
             <div class="mb-3">
-                <label for="EmailInput" class="form-label">Correo</label>
-                <input type="email" class="form-control" id="emailLogin" aria-describedby="emailHelp" formControlName="emailLogin">
-                <div *ngIf="loginForm?.get('emailLogin')?.invalid && loginForm?.get('emailLogin')?.touched" class="text-danger">
-                    Correo invalido
+                <label for="NameInput" class="form-label">Nombre</label>
+                <input type="text" class="form-control" formControlName="name">
+                <div *ngIf="loginForm?.get('name')?.invalid && loginForm?.get('name')?.touched" class="text-danger">
+                    nombre invalido
                 </div>
             </div>
             <div class="mb-3">
-                <label for="PasswordInput" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" autocomplete="off" id="passwordLogin" formControlName="passwordLogin">
-                <div *ngIf="loginForm?.get('passwordLogin')?.invalid && loginForm?.get('passwordLogin')?.touched" class="text-danger">
-                    Contraseña es un campo obligatorio
+                <label for="descriptionInput" class="form-label">Descripción</label>
+                <input type="textarea" class="form-control" id="description" formControlName="description">
+                <div *ngIf="loginForm?.get('description')?.invalid && loginForm?.get('description')?.touched" class="text-danger">
+                    Descripcion invalida
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="dateEventInput" class="form-label">Correo</label>
+                <input type="datetime" class="form-control" id="dateEvent" formControlName="dateEvent">
+                <div *ngIf="loginForm?.get('dateEvent')?.invalid && loginForm?.get('dateEvent')?.touched" class="text-danger">
+                    fecha invalida
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="idCityInput" class="form-label">Correo</label>
+                <input type="text" class="form-control" id="idCity" formControlName="idCity">
+                <div *ngIf="loginForm?.get('idCity')?.invalid && loginForm?.get('idCity')?.touched" class="text-danger">
+                    ciudad
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="addresInput" class="form-label">Correo</label>
+                <input type="text" class="form-control" id="addres" formControlName="addres">
+                <div *ngIf="loginForm?.get('addres')?.invalid && loginForm?.get('addres')?.touched" class="text-danger">
+                    dirección invalida
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="capacityInput" class="form-label">Correo</label>
+                <input type="number" class="form-control" id="capacity" formControlName="capacity">
+                <div *ngIf="loginForm?.get('capacity')?.invalid && loginForm?.get('capacity')?.touched" class="text-danger">
+                    capacidad invalida
                 </div>
             </div>
         </div>
-        <!-- <div *ngIf="!isOwner">
-            <h3>Nombre: {{ event.Name }}</h3>
+        <div *ngIf="!isOwner && !isCreate">
+            <p>Descripción: {{ currentEvent?.description }}</p>
             <br>
-            <p>Descripción: {{ event.Description }}</p>
+            <p>Ciudad: {{ currentEvent?.idcity }}</p>
             <br>
-            <p>Ciudad: {{ event.City }}</p>
+            <p>Fecha y hora: {{ currentEvent?.dateEvent | date : 'dd/MM/yyyyy HH:mm' }}</p>
             <br>
-            <p>Fecha y hora: {{ event.DateEvent | date : 'dd/MM/yyyyy HH:mm' }}</p>
+            <p>Dirección: {{ currentEvent?.address }}</p>
             <br>
-            <p>Dirección: {{ event.Address }}</p>
-            <br>
-            <p>Capacidad: {{ event.Capacity }}</p>
-        </div> -->
+            <p>Capacidad: {{ currentEvent?.capacity }}</p>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary" [hidden]="!isOwner">Editar</button>
         <button type="submit" class="btn btn-success" [hidden]="!isCreate">Crear</button>
-        <button type="submit" class="btn btn-danger" [hidden]="!isOwner">Eliminar</button>
-        <button type="submit" class="btn btn-success" [hidden]="isOwner">Incribirse</button>
     </div>
 </form>

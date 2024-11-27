@@ -14,15 +14,20 @@ import { TokenService } from '../../Services/token.service';
 })
 export class EventsComponent implements OnInit  {
   eventData: EventModel[] = [];
+  currentEvent: EventModel;
   suscriptionList: number[] = [];
   suscribeRequest: SuscribeRequest = new SuscribeRequest;
   isLogged: boolean = false;
   registerSuccess: boolean = false;
   idUser: number = 0;
+  isCreate: boolean = false;
+  isOwner: boolean = false;
 
   constructor(private eventsService: EventsService,
     private tokenService: TokenService
-  ) {}
+  ) {
+    this.currentEvent = new EventModel;
+  }
 
   async ngOnInit() {
     this.getSession();
@@ -133,7 +138,19 @@ export class EventsComponent implements OnInit  {
     );
   }
 
-  createEvent() {
-    
+  create() {
+    this.isOwner = false;
+    this.isCreate = true;
+  }
+
+  edit() {
+    this.isOwner = true;
+    this.isCreate = false;
+  }
+
+  details(idEvent: number) {
+    this.currentEvent = this.eventData.filter(x => x.idEvent === idEvent)[0] ?? new EventModel;
+    this.isOwner = false;
+    this.isCreate = false;
   }
 }

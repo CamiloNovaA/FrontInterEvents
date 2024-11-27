@@ -1,4 +1,4 @@
-export interface EventModel {
+export class EventModel {
     idEvent: number;
     idEventSuscription: number;
     name: string;
@@ -13,4 +13,21 @@ export interface EventModel {
     capacity: number;
     active: boolean;
     creationDate: Date;
+
+    constructor() {
+        this.idEvent = 0;
+        this.idEventSuscription = 0;
+        this.name = "";
+        this.description = "";
+        this.dateEvent = new Date;
+        this.idcity = "";
+        this.nameCity = "";
+        this.longitude = "";
+        this.latitude = "";
+        this.address = "";
+        this.owner = 0;
+        this.capacity = 0;
+        this.active = true;
+        this.creationDate = new Date
+    }
 }
